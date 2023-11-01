@@ -1,10 +1,13 @@
-import os
+import os, json
 import uvicorn
 from fastapi import FastAPI
 from fastapi.responses import JSONResponse
 from pydantic import BaseModel
 
+
 app = FastAPI()
+_CONFIG = json.load(open("src/config.json"))
+
 
 class PredictionRequest(BaseModel):
     url: str
@@ -18,6 +21,7 @@ def root():
 @app.post("/process")
 async def get_results(request: PredictionRequest):
     url = request.url
+    print(url)
     if url:
         return JSONResponse(content={
             "status": "success",
@@ -31,4 +35,4 @@ async def get_results(request: PredictionRequest):
 
 
 if __name__ == "__main__":
-    uvicorn.run(app, port=...)
+    uvicorn.run(app, port=_CONFIG["backend_port"])

@@ -14,11 +14,11 @@ def send_request(backend_host: str, backend_port: str, url_message: str):
 
 def ui():
     input_url_value = st.text_input('URL')
-
-    response = send_request(backend_host=_CONFIG["backend_host"],
-                 backend_port=str(_CONFIG["backend_port"]),
-                 url_message=input_url_value)
-    print(response.status_code)
+    if input_url_value:
+        response = send_request(backend_host=_CONFIG["backend_host"],
+                    backend_port=str(_CONFIG["backend_port"]),
+                    url_message=input_url_value)
+        print(response.status_code)
     
 
 if __name__=="__main__":

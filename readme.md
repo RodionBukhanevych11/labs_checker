@@ -1,6 +1,10 @@
 # Labs Checker
 ## Content
+- [Project structure](#project-structure)
 - [Installation](#installation)
+
+### Project structure
+![Alt text](image.png)
 
 ### Installation
 1. Create venv for backend

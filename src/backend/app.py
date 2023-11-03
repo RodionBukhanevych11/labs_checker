@@ -29,7 +29,7 @@ async def get_results(request: PredictionRequest):
     login = request.login
     password = request.password
     lab = request.lab
-    print(url, '\n', login, '\n', password)
+    print(caller, '\n', url, '\n', login, '\n', password, '\n', lab)
     
     if caller == "button_examine":
         if url:

@@ -34,7 +34,7 @@ def ui():
                                             password_message=input_password_value)
     with col1_2:
         if st.button("Sign in"):
-            sign_up_response = send_authorize_request(backend_host=_CONFIG["backend_host"],
+            sign_in_response = send_authorize_request(backend_host=_CONFIG["backend_host"],
                                             backend_port=str(_CONFIG["backend_port"]),
                                             action="sign in",
                                             login_message=input_login_value,

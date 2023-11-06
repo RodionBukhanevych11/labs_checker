@@ -20,6 +20,7 @@ def root():
     return JSONResponse(content={"message": "Welcome to the LabsChecker API"})
 
 
+
 @app.post("/authorize")
 async def authorize(request: AuthorizeRequest):
     action = request.action

@@ -9,6 +9,7 @@
 ### Installation
 1. Create venv for backend
 ```
+
 python3 -m venv src/backend/.backend_venv
 source src/backend/.backend_venv/bin/activate
 pip3 install -r src/backend/requirements.txt
@@ -23,10 +24,12 @@ pip3 install -r src/ui/requirements.txt
 ```
 python src/backend/app.py
 streamlit run src/ui/ui.py --server.port 8080
+
 ```
 ### Installation (Windows Edition)
 1. Create venv for backend
 ```
+
 python -m venv .\src\backend
 .\src\backend\Scripts\activate.bat
 python -m pip install -r .\src\backend\requirements.txt

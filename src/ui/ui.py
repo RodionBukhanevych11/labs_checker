@@ -21,7 +21,7 @@ def send_authorize_request(
 
 
 def ui():
-    header_authorization = st.header("Authorization")
+    _ = st.header("Authorization")
     input_login_value = st.text_input('Login')
     input_password_value = st.text_input('Password')
     col1_1, col1_2 = st.columns(2)

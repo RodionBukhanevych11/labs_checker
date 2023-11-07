@@ -4,7 +4,7 @@
 - [Installation](#installation)
 
 ### Project structure
-![Alt text](image.png)
+![Alt text](assets/image.png)
 
 ### Installation
 1. Create venv for backend

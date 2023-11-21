@@ -2,16 +2,17 @@
 ## Content
 - [Project structure](#project-structure)
 - [Installation](#installation)
+- [Installation for Windows](#installation-windows-edition)
 
 ### Project structure
 
 ![Alt text](assets/image.png)
 
+!Before anything change the password in [db_config.json](src\db_config.json)
 
 ### Installation
 1. Create venv for backend
 ```
-
 python3 -m venv src/backend/.backend_venv
 source src/backend/.backend_venv/bin/activate
 pip3 install -r src/backend/requirements.txt
@@ -31,7 +32,6 @@ streamlit run src/ui/ui.py --server.port 8080
 ### Installation (Windows Edition)
 1. Create venv for backend
 ```
-
 python -m venv .\src\backend
 .\src\backend\Scripts\activate.bat
 python -m pip install -r .\src\backend\requirements.txt

@@ -8,7 +8,7 @@
 
 ![Alt text](assets/image.png)
 
-! Before anything change the password in [db_config.json](src\db_config.json)
+! Before anything change the password in [db_config.json](src/db_config.json)
 
 ### Installation
 1. Create venv for backend

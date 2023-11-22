@@ -3,7 +3,7 @@ import uvicorn
 from fastapi import FastAPI
 from fastapi.responses import JSONResponse
 from pydantic import BaseModel
-from db_utils.process import LabsCheckerDB
+from db_utils.process import LabsCheckerDB as db
 
 
 app = FastAPI()
@@ -28,14 +28,8 @@ async def authorize(request: AuthorizeRequest):
     username = request.username
     password = request.password
     print(username, password)
-    db = LabsCheckerDB(dbname=_CONFIG["dbname"],
-                    user=_CONFIG["user"],
-                    password='12345678',
-                    host=_CONFIG["dbhost"])
     if action == "sign up":
         if username and password:
-            if not db.check_user(username):
-                db.register_user(username=username, password=password)
             return JSONResponse(content={
                 "status": "success",
                 "message": "Processed",

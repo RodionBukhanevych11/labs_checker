@@ -34,15 +34,11 @@ class LabsCheckerDB:
             return True
         else:
             return False
-    
-    def register_user(self, username, password):
-        self.cursor.execute(f"""INSERT INTO users (username, password)
-                            VALUES ({username}, {password});""")
 
 if __name__ == "__main__":
-    labsCheckerDb = LabsCheckerDB(dbname=_CONFIG["dbname"],
-                                  user=_CONFIG["user"],
-                                  password='12345678',
-                                  host=_CONFIG["dbhost"])
+    labsCheckerDb = LabsCheckerDB(dbname=_CONFIG["db_name"],
+                    user=_CONFIG["db_user"],
+                    password=_CONFIG["db_password"],
+                    host=_CONFIG["db_host"])
 
     

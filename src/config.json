@@ -4,5 +4,6 @@
     "db_name": "labs_checker_db",
     "db_user": "postgres",
     "db_password": "12345678",
+    "db_table_name": "users",
     "db_host": "localhost"
 }

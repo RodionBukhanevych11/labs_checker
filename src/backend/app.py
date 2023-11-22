@@ -3,6 +3,7 @@ import uvicorn
 from fastapi import FastAPI
 from fastapi.responses import JSONResponse
 from pydantic import BaseModel
+from db_utils.process import LabsCheckerDB
 
 
 app = FastAPI()
@@ -11,7 +12,7 @@ _CONFIG = json.load(open("src/config.json"))
 
 class AuthorizeRequest(BaseModel):
     action: str
-    login: str
+    username: str
     password: str
 
 
@@ -24,50 +25,57 @@ def root():
 @app.post("/authorize")
 async def authorize(request: AuthorizeRequest):
     action = request.action
-    login = request.login
+    username = request.username
     password = request.password
+    print(username, password)
+    db = LabsCheckerDB(dbname=_CONFIG["dbname"],
+                    user=_CONFIG["user"],
+                    password='12345678',
+                    host=_CONFIG["dbhost"])
     if action == "sign up":
-        if login and password:
+        if username and password:
+            if not db.check_user(username):
+                db.register_user(username=username, password=password)
             return JSONResponse(content={
                 "status": "success",
                 "message": "Processed",
                 }, status_code=210)
-        elif login and not password:
+        elif username and not password:
             return JSONResponse(content={
                 "status": "unsuccess",
                 "message": "empty password",
                 }, status_code=410)
-        elif not login and password:
+        elif not username and password:
             return JSONResponse(content={
                 "status": "unsuccess",
-                "message": "empty login",
+                "message": "empty username",
                 }, status_code=411)
         else:
             return JSONResponse(content={
                 "status": "unsuccess",
-                "message": "empty login and password",
+                "message": "empty username and password",
                 }, status_code=413)
     
     if action == "sign in":
-        if login and password:
+        if username and password:
             return JSONResponse(content={
                 "status": "success",
                 "message": "Processed",
                 }, status_code=220)
-        elif login and not password:
+        elif username and not password:
             return JSONResponse(content={
                 "status": "unsuccess",
                 "message": "empty password",
                 }, status_code=421)
-        elif not login and password:
+        elif not username and password:
             return JSONResponse(content={
                 "status": "unsuccess",
-                "message": "empty login",
+                "message": "empty username",
                 }, status_code=422)
         else:
             return JSONResponse(content={
                 "status": "unsuccess",
-                "message": "empty login and password",
+                "message": "empty username and password",
                 }, status_code=423)
 
 

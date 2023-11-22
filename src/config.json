@@ -1,8 +1,7 @@
 {
     "backend_port": 5050,
     "backend_host": "http://127.0.0.1",
-    "db_name": "labs_checker_db",
-    "user": "root",
-    "password": "root_password",
-    "db_host": "http://127.0.0.1"
+    "dbname": "labs_checker_db",
+    "user": "postgres",
+    "dbhost": "localhost"
 }

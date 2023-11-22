@@ -14,31 +14,35 @@ class LabsCheckerDB:
         self.connect()
 
     def connect(self):
-        conn = psycopg2.connect(dbname=self.dbname, user=self.user, 
+        self.conn = psycopg2.connect(dbname=self.dbname, user=self.user, 
                             password=self.password, host=self.host)
-        self.cursor = conn.cursor()
+        self.cursor = self.conn.cursor()
 
     def check_user(self, user: str) -> bool:
-        self.cursor.execute(f"SELECT user FROM {self.dbname}")
+        self.cursor.execute(f"""SELECT user FROM {self.dbname};""")
         users = self.cursor.fetchall()
+        print(users)
         if user in users:
             return True
         else:
             return False
         
     def check_password(self, user: str, password: str) -> bool:
-        self.cursor.execute(f"SELECT password FROM {self.dbname} WHERE user = {user}")
+        self.cursor.execute(f"""SELECT password FROM {self.dbname} WHERE user = {user};""")
         db_password = self.cursor.fetchall()
         if password == db_password:
             return True
         else:
             return False
-        
+    
+    def register_user(self, username, password):
+        self.cursor.execute(f"""INSERT INTO users (username, password)
+                            VALUES ({username}, {password});""")
 
 if __name__ == "__main__":
     labsCheckerDb = LabsCheckerDB(dbname=_CONFIG["dbname"],
                                   user=_CONFIG["user"],
-                                  password=_CONFIG["password"],
-                                  host=_CONFIG["db_host"])
+                                  password='12345678',
+                                  host=_CONFIG["dbhost"])
 
     

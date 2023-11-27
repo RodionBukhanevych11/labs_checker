@@ -23,7 +23,7 @@ pip3 install -r src/ui/requirements.txt
 ```
 3. Run application
 ```
-python src/backend/app.py
+python3 src/backend/app.py
 streamlit run src/ui/ui.py --server.port 8080
 
 ```

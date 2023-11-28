@@ -24,19 +24,20 @@ pip3 install -r src/ui/requirements.txt
 3. Run application
 ```
 python3 src/backend/app.py
+streamlit run src/ui/ui.py --server.port 8080
 ```
 ### Installation (Windows Edition)
 1. Create venv for backend
 ```
-python -m venv .\src\backend
-.\src\backend\Scripts\activate.bat
-python -m pip install -r .\src\backend\requirements.txt
+python -m venv src/backend
+src/backend/Scripts/activate.bat
+python -m pip install -r src/backend/requirements.txt
 ```
 2. Create venv for ui
 ```
-python -m venv .\src\ui
-.\src\ui\Scripts\activate.bat
-python -m pip install -r .\src\ui\requirements.txt
+python -m venv src/ui
+src/ui/Scripts/activate.bat
+python -m pip install -r src/ui/requirements.txt
 ```
 3. Run application
 ```

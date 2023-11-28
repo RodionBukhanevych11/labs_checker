@@ -44,24 +44,33 @@ async def authorize(request: AuthorizeRequest):
             if not db.check_user(username):
                 db.register_user(username, password)
                 print("Registered!")
+                return JSONResponse(content={
+                    "status": "success",
+                    "message": "Processed",
+                    "result": "authorized"
+                    }, status_code=214)
             return JSONResponse(content={
                 "status": "success",
                 "message": "Processed",
+                "result": "unauthorized"
                 }, status_code=210)
         elif username and not password:
             return JSONResponse(content={
                 "status": "unsuccess",
                 "message": "empty password",
+                "result": "unauthorized"
                 }, status_code=410)
         elif not username and password:
             return JSONResponse(content={
                 "status": "unsuccess",
                 "message": "empty username",
+                "result": "unauthorized"
                 }, status_code=411)
         else:
             return JSONResponse(content={
                 "status": "unsuccess",
                 "message": "empty username and password",
+                "result": "unauthorized"
                 }, status_code=413)
     
     if action == "sign in":
@@ -71,25 +80,30 @@ async def authorize(request: AuthorizeRequest):
                 return JSONResponse(content={
                 "status": "success",
                 "message": "Processed",
+                "result": "authorized"
                 }, status_code=220)
             return JSONResponse(content={
                 "status": "unsuccess",
                 "message": "wrong data",
+                "result": "unauthorized"
                 }, status_code=424)
         elif username and not password:
             return JSONResponse(content={
                 "status": "unsuccess",
                 "message": "empty password",
+                "result": "unauthorized"
                 }, status_code=421)
         elif not username and password:
             return JSONResponse(content={
                 "status": "unsuccess",
                 "message": "empty username",
+                "result": "unauthorized"
                 }, status_code=422)
         else:
             return JSONResponse(content={
                 "status": "unsuccess",
                 "message": "empty username and password",
+                "result": "unauthorized"
                 }, status_code=423)
 
 

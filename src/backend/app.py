@@ -15,7 +15,7 @@ db = LabsCheckerDB(dbname=_CONFIG["db_name"],
                     host=_CONFIG["db_host"])
 
 class AuthorizeRequest(BaseModel):
-    action: str
+    action: str = "sign in"
     username: str
     password: str
 
@@ -24,6 +24,14 @@ class AuthorizeRequest(BaseModel):
 def root():
     return JSONResponse(content={"message": "Welcome to the LabsChecker API"})
 
+@app.get("/result")
+def result(request: AuthorizeRequest):    
+    username = request.username
+    password = request.password
+    if username and password:
+            if db.check_user(username) and db.check_password(username, password):
+                return JSONResponse(content={"result": "authorized"})
+    return JSONResponse(content={"result": "unauthorized"})
 
 
 @app.post("/authorize")
@@ -59,7 +67,7 @@ async def authorize(request: AuthorizeRequest):
     if action == "sign in":
         if username and password:
             if db.check_user(username) and db.check_password(username, password):
-                print("Signed up!")
+                print("Signed in!")
                 return JSONResponse(content={
                 "status": "success",
                 "message": "Processed",

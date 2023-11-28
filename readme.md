@@ -11,13 +11,13 @@
 ### Installation
 1. Create venv for backend
 ```
-python3 -m venv src/backend/.backend_venv
-source src/backend/.backend_venv/bin/activate
+python3 -m venv src/backend/
+source src/backend/.backend_venv/bin/activate 
 pip3 install -r src/backend/requirements.txt
 ```
 2. Create venv for ui
 ```
-python3 -m venv src/ui/.ui_venv
+python3 -m venv src/ui/
 source src/ui/.ui_venv/bin/activate
 pip3 install -r src/ui/requirements.txt
 ```

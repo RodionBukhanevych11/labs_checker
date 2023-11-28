@@ -15,7 +15,7 @@ db = LabsCheckerDB(dbname=_CONFIG["db_name"],
                     host=_CONFIG["db_host"])
 
 class AuthorizeRequest(BaseModel):
-    action: str = "sign in"
+    action: str
     username: str
     password: str
 

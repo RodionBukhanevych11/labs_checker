@@ -19,20 +19,6 @@ def send_authorize_request(
     response = requests.post(url=request_url, json=request_json)
     return response
 
-def get_auth_request(
-    backend_host: str,
-    backend_port: str,
-    action: str = "",
-    username_message: str = "",
-    password_message: str = ""):    
-    request_json = {"action": action,
-                    "username": username_message,
-                    "password": password_message}
-    request_url = backend_host + ":" + backend_port + "/result"
-    res = requests.get(url=request_url, json=request_json)
-    print(res.json())
-    return res.json()
-
 
 st.set_page_config(
     page_title="Labs Checker"
@@ -51,7 +37,6 @@ def ui_authorized():
     button_examine =  st.button("Examine")
 
 def ui_unauthorized():
-    print(st.session_state["result"])
     _ = st.header("Authorization")
     input_username_value = st.text_input('Username')
     input_password_value = st.text_input('Password')
@@ -63,7 +48,6 @@ def ui_unauthorized():
                                             action="sign up",
                                             username_message=input_username_value,
                                             password_message=input_password_value)
-            print(sign_up_response.json())
             st.session_state["result"] = sign_up_response.json()["result"]
     with col1_2:
         if st.button("Sign in"):
@@ -72,10 +56,7 @@ def ui_unauthorized():
                                             action="sign in",
                                             username_message=input_username_value,
                                             password_message=input_password_value)
-            print(sign_in_response.json())
-            st.session_state["result"] = sign_in_response.json()["result"]
-
-            print(st.session_state["result"] == "unauthorized") 
+            st.session_state["result"] = sign_in_response.json()["result"] 
         
 
 if __name__=="__main__":

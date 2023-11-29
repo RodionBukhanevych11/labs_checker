@@ -24,15 +24,6 @@ class AuthorizeRequest(BaseModel):
 def root():
     return JSONResponse(content={"message": "Welcome to the LabsChecker API"})
 
-@app.get("/result")
-def result(request: AuthorizeRequest):    
-    username = request.username
-    password = request.password
-    if username and password:
-            if db.check_user(username) and db.check_password(username, password):
-                return JSONResponse(content={"result": "authorized"})
-    return JSONResponse(content={"result": "unauthorized"})
-
 
 @app.post("/authorize")
 async def authorize(request: AuthorizeRequest):

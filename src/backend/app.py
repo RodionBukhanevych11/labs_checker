@@ -4,6 +4,8 @@ from fastapi import FastAPI
 from fastapi.responses import JSONResponse
 from pydantic import BaseModel
 from db_utils.process import LabsCheckerDB
+from src.backend.utils import inference
+import time
 
 
 app = FastAPI()
@@ -18,6 +20,10 @@ class AuthorizeRequest(BaseModel):
     action: str
     username: str
     password: str
+
+class LabRequest(BaseModel):
+    username: str
+    lab_file: bytes
 
 
 @app.get("/")
@@ -97,6 +103,14 @@ async def authorize(request: AuthorizeRequest):
                 "result": "unauthorized"
                 }, status_code=423)
 
+
+@app.post("/check")
+async def check(request: LabRequest):
+    username = request.username
+    lab_file = request.lab_file
+    inference(lab_file=lab_file)
+    
+    return JSONResponse(content={})
 
 if __name__ == "__main__":
     uvicorn.run(app, port=_CONFIG["backend_port"])

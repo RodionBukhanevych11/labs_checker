@@ -40,10 +40,14 @@ def create_folder(username: str):
     return path
 
 def save_file(lab_bytes: bytes,
-              folder: str):
+              folder: str,
+              lab: str):
     str_data = lab_bytes.decode('utf-8')
-    with open(os.path.join(folder, "lab.py"), 'w') as file:
+    path = os.path.join(folder,
+                        f"""{lab} {st.session_state["username"]}.py""")
+    with open(path, 'w') as file:
             file.write(str_data)
+    return path
 
 st.set_page_config(
     page_title="Labs Checker"
@@ -72,7 +76,8 @@ def ui_authorized():
             #                                 file=lab_bytes)
             save_path = create_folder(username=st.session_state["username"])
             save_file(lab_bytes=lab_bytes,
-                      folder=save_path)
+                      folder=save_path,
+                      lab=selectbox_labs_value)
 
 def ui_unauthorized():
     _ = st.header("Authorization")

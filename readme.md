@@ -2,18 +2,17 @@
 ## Content
 - [Project structure](#project-structure)
 - [Installation](#installation)
+- [Installation for Windows](#installation-windows-edition)
 
 ### Project structure
 
 ![Alt text](assets/image.png)
 
-
 ### Installation
 1. Create venv for backend
 ```
-
 python3 -m venv src/backend/.backend_venv
-source src/backend/.backend_venv/bin/activate
+source src/backend/.backend_venv/bin/activate 
 pip3 install -r src/backend/requirements.txt
 ```
 2. Create venv for ui
@@ -24,23 +23,21 @@ pip3 install -r src/ui/requirements.txt
 ```
 3. Run application
 ```
-python src/backend/app.py
+python3 src/backend/app.py
 streamlit run src/ui/ui.py --server.port 8080
-
 ```
 ### Installation (Windows Edition)
 1. Create venv for backend
 ```
-
-python -m venv .\src\backend
-.\src\backend\Scripts\activate.bat
-python -m pip install -r .\src\backend\requirements.txt
+python -m venv src/backend
+src/backend/Scripts/activate.bat
+python -m pip install -r src/backend/requirements.txt
 ```
 2. Create venv for ui
 ```
-python -m venv .\src\ui
-.\src\ui\Scripts\activate.bat
-python -m pip install -r .\src\ui\requirements.txt
+python -m venv src/ui
+src/ui/Scripts/activate.bat
+python -m pip install -r src/ui/requirements.txt
 ```
 3. Run application
 ```

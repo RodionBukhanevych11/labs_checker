@@ -1,0 +1,6 @@
+{
+    "name": "labs_checker_db",
+    "user": "postgres",
+    "password": "PUT YOUR PASSWORD HERE",
+    "host": "localhost"
+}

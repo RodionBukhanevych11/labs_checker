@@ -1,3 +1,4 @@
+import re
 import os, json
 import uvicorn
 from fastapi import FastAPI
@@ -25,6 +26,11 @@ class LabRequest(BaseModel):
     username: str
     lab_file: bytes
 
+def is_injected(string) -> bool:
+    if re.search(r"[^A-Za-z0-9]+", string):
+        return True
+    else:
+        return False
 
 @app.get("/")
 def root():
@@ -36,6 +42,13 @@ async def authorize(request: AuthorizeRequest):
     action = request.action
     username = request.username
     password = request.password
+    if is_injected(username) or is_injected(password):
+        return JSONResponse(content={
+            "status": "unsuccess",
+            "message": "Bad Request",
+            "result": "unauthorized"
+            }, status_code=400)
+    
     if action == "sign up":
         if username and password:
             if not db.check_user(username):
@@ -109,7 +122,6 @@ async def check(request: LabRequest):
     username = request.username
     lab_file = request.lab_file
     inference(lab_file=lab_file)
-    
     return JSONResponse(content={})
 
 if __name__ == "__main__":
